@@ -121,6 +121,15 @@ class DatabaseConnection:
                     str(e)
                 ) from e
 
+    def close(self) -> None:
+        """
+        Alias for disconnect(). Close database connection.
+
+        Raises:
+            DatabaseOperationError: If disconnection fails.
+        """
+        self.disconnect()
+
     def enable_foreign_keys(self) -> None:
         """
         Enable foreign key constraints.

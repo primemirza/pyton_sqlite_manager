@@ -1,89 +1,116 @@
 # SQLite Database Manager
 
-A professional desktop application for managing SQLite databases with a modern graphical interface.
+Aplikasi desktop untuk mengelola database SQLite secara visual tanpa perlu menggunakan command line.
 
-## Description
+## 📋 Deskripsi
 
-SQLite Database Manager is a comprehensive tool for creating, opening, viewing, managing, editing, and maintaining SQLite databases visually without using command line tools. Built with Python and PySide6, it provides an intuitive interface for database operations while maintaining performance and security.
+SQLite Database Manager adalah aplikasi GUI yang dibangun dengan Python dan PySide6 untuk memudahkan pengelolaan database SQLite. Aplikasi ini menyediakan antarmuka visual untuk membuat, membuka, melihat, mengedit, dan memelihara database SQLite.
 
-## Features
+## ✨ Fitur Utama
 
-### Core Features
-- **Database Management**: Create, open, close, and manage multiple SQLite databases
-- **Database Explorer**: Navigate tables, views, indexes, and triggers in a sidebar
-- **Data Browser**: View and edit table data with pagination, sorting, and filtering
-- **SQL Editor**: Execute custom SQL queries with syntax highlighting and history
-- **Table Designer**: Create and modify table structures visually
-- **Import/Export**: Import CSV files and export data to CSV, JSON, or SQL formats
+### Manajemen Database
+- Membuat database SQLite baru
+- Membuka database SQLite yang sudah ada
+- Menutup database
+- Menampilkan informasi database (path, ukuran, versi SQLite, dll)
+- Backup dan restore database
+- Vacuum dan analyze database
+- Integrity check
 
-### Advanced Features
-- **Search**: Search across all tables for specific text values
-- **Backup & Restore**: Safe database backup using SQLite API
-- **Maintenance**: Vacuum, analyze, and integrity check operations
-- **Query History**: Track and reuse previously executed queries
-- **Dark Mode**: Light and dark theme support
-- **Foreign Key Support**: View and manage foreign key relationships
+### Database Explorer
+- Menampilkan struktur database (tabel, view, index, trigger)
+- Navigasi hierarkis melalui sidebar
 
-### Security & Performance
-- Parameterized queries to prevent SQL injection
-- Transaction management with commit/rollback
-- Efficient pagination for large datasets
-- Async operations to prevent UI freezing
-- Comprehensive error handling and logging
+### Data Browser
+- Menampilkan data tabel dengan pagination
+- Sorting berdasarkan kolom
+- Filtering dan pencarian data
+- Insert, edit, dan delete row
+- Commit dan rollback perubahan
 
-## Requirements
+### Table Structure
+- Melihat struktur tabel (kolom, tipe data, constraint)
+- Membuat tabel baru
+- Menambah kolom
+- Menghapus kolom
+- Mengubah struktur tabel
+- Menghapus tabel
 
-- Python 3.12 or later (compatible with 3.8+)
-- PySide6
-- pytest (for running tests)
+### SQL Editor
+- Menulis dan mengeksekusi query SQL
+- Multi-statement SQL support
+- Query history
+- Menyimpan query favorit
+- Shortcut keyboard (Ctrl+Enter untuk execute)
 
-## Installation
+### Import/Export
+- Import dari CSV
+- Export ke CSV
+- Export ke JSON
+- Export ke SQL
 
-### 1. Clone or download the project
+### Fitur Lainnya
+- Pencarian data di seluruh database
+- Dark mode dan light mode
+- Logging aktivitas
+- Foreign key support
+- Trigger dan view management
+
+## 🛠️ Requirements
+
+- Python 3.12 atau versi stabil terbaru
+- PySide6 >= 6.6.0
+- pytest >= 7.4.0 (untuk testing)
+
+## 📦 Instalasi
+
+### 1. Clone Repository
 
 ```bash
+git clone <repository-url>
 cd sqlite_manager
 ```
 
-### 2. Create virtual environment (recommended)
+### 2. Buat Virtual Environment (Opsional tapi Disarankan)
 
 ```bash
+# Windows
 python -m venv venv
-```
-
-### 3. Activate virtual environment
-
-**Windows:**
-```bash
 venv\Scripts\activate
-```
 
-**Linux/Mac:**
-```bash
+# Linux/Mac
+python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 4. Install dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Running the Application
+## 🚀 Cara Menjalankan
 
-### Development Mode
+### Mode Normal
 
 ```bash
 python main.py
 ```
 
-### With Logging Level
+### Dengan Log Level Tertentu
 
 ```bash
+# Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
 python main.py --log-level DEBUG
 ```
 
-## Building Windows EXE
+### Specify Database pada Startup
+
+```bash
+python main.py --database path/to/database.db
+```
+
+## 🏗️ Build menjadi EXE (Windows)
 
 ### 1. Install PyInstaller
 
@@ -91,160 +118,219 @@ python main.py --log-level DEBUG
 pip install pyinstaller
 ```
 
-### 2. Build the executable
+### 2. Build EXE
 
 ```bash
-pyinstaller --onefile --windowed --name "SQLite Database Manager" --icon=resources/icon.ico main.py
-```
+# One-file executable
+pyinstaller --onefile --windowed --name "SQLite Database Manager" main.py
 
-Or use the provided spec file:
-
-```bash
+# Atau gunakan spec file untuk konfigurasi lebih detail
 pyinstaller sqlite_manager.spec
 ```
 
-The executable will be created in the `dist` directory.
+### 3. Hasil Build
 
-## Project Structure
+File executable akan terdapat di folder `dist/`:
+- Windows: `dist/SQLite Database Manager.exe`
+- Linux: `dist/SQLite Database Manager`
+- macOS: `dist/SQLite Database Manager.app`
+
+## 📁 Struktur Project
 
 ```
 sqlite_manager/
 │
-├── main.py                 # Application entry point
-├── requirements.txt        # Python dependencies
-├── README.md              # This file
-├── .gitignore             # Git ignore rules
+├── main.py                      # Entry point aplikasi
+├── requirements.txt             # Dependencies Python
+├── README.md                    # Dokumentasi (file ini)
+├── .gitignore                   # Git ignore rules
 │
-├── app/                   # Application core
+├── app/                         # Core aplikasi
 │   ├── __init__.py
-│   ├── application.py     # Main application class
-│   └── settings.py        # Application settings
+│   ├── application.py           # Main application class
+│   └── settings.py              # Pengaturan aplikasi
 │
-├── core/                  # Core utilities
+├── core/                        # Utilities inti
 │   ├── __init__.py
-│   ├── config.py          # Configuration constants
-│   └── exceptions.py      # Custom exceptions
+│   ├── config.py                # Konstanta konfigurasi
+│   └── exceptions.py            # Custom exceptions
 │
-├── database/              # Database layer
+├── database/                    # Layer database
 │   ├── __init__.py
-│   ├── connection.py      # Connection management
-│   ├── manager.py         # Database operations
-│   └── schema.py          # Schema information
+│   ├── connection.py            # Manajemen koneksi
+│   └── manager.py               # Operasi database
 │
-├── models/                # Data models
+├── models/                      # Model data
+│   └── __init__.py
+│
+├── repositories/                # Data access layer
+│   └── __init__.py
+│
+├── services/                    # Business logic
+│   └── __init__.py
+│
+├── ui/                          # User interface
 │   ├── __init__.py
-│   └── table_model.py     # Qt table models
+│   ├── main_window.py           # Main window
+│   ├── explorer/                # Database explorer
+│   ├── browser/                 # Data browser
+│   ├── structure/               # Table structure
+│   ├── editor/                  # SQL editor
+│   ├── dialogs/                 # Dialog windows
+│   └── widgets/                 # Reusable widgets
 │
-├── repositories/          # Data access layer
+├── utils/                       # Utilities
 │   ├── __init__.py
-│   ├── base_repository.py
-│   └── table_repository.py
+│   ├── logger.py                # Setup logging
+│   └── validators.py            # Validasi input
 │
-├── services/              # Business logic
-│   ├── __init__.py
-│   ├── import_service.py
-│   ├── export_service.py
-│   ├── search_service.py
-│   └── query_history.py
+├── styles/                      # Stylesheets
+│   └── __init__.py
 │
-├── ui/                    # User interface
-│   ├── __init__.py
-│   ├── main_window.py     # Main window
-│   ├── explorer/          # Database explorer
-│   ├── browser/           # Data browser
-│   ├── structure/         # Table structure
-│   ├── editor/            # SQL editor
-│   ├── dialogs/           # Dialog windows
-│   └── widgets/           # Reusable widgets
-│
-├── utils/                 # Utilities
-│   ├── __init__.py
-│   ├── logger.py          # Logging setup
-│   └── validators.py      # Input validation
-│
-├── styles/                # Stylesheets
-│   ├── __init__.py
-│   ├── light_theme.qss
-│   └── dark_theme.qss
-│
-└── tests/                 # Unit tests
+└── tests/                       # Unit tests
     ├── __init__.py
     ├── test_database/
+    │   ├── __init__.py
+    │   ├── test_connection.py
+    │   └── test_manager.py
     ├── test_repositories/
     └── test_services/
 ```
 
-## Running Tests
+## 🧪 Cara Menjalankan Test
 
-### Run all tests
-
-```bash
-pytest tests/ -v
-```
-
-### Run specific test module
+### 1. Install Dependencies Testing
 
 ```bash
-pytest tests/test_database/ -v
+pip install -r requirements.txt
 ```
 
-### Run with coverage
+### 2. Jalankan Semua Test
 
 ```bash
-pytest tests/ --cov=sqlite_manager --cov-report=html
+pytest
 ```
 
-## Troubleshooting
-
-### Common Issues
-
-**1. PySide6 not found**
-```bash
-pip install pyside6
-```
-
-**2. Database locked error**
-- Close any other applications using the database
-- Ensure proper transaction management (commit/rollback)
-
-**3. UI freezing on large queries**
-- Use pagination in data browser
-- Add LIMIT clause to SQL queries
-- Heavy operations run in separate threads
-
-**4. Import errors**
-- Ensure you're in the project root directory
-- Check that all dependencies are installed
-- Verify Python version (3.12+)
-
-### Logging
-
-Logs are stored in the application directory. To view debug information:
+### 3. Jalankan Test dengan Coverage
 
 ```bash
-python main.py --log-level DEBUG
+pytest --cov=. --cov-report=html
 ```
 
-Log files can be found in the `logs` directory.
+### 4. Jalankan Test Tertentu
 
-## License
+```bash
+# Test module tertentu
+pytest tests/test_database/test_connection.py
 
-This project is provided as-is for educational and practical use.
+# Test function tertentu
+pytest tests/test_database/test_connection.py::test_connect
 
-## Contributing
+# Test dengan verbose output
+pytest -v
+```
 
-Contributions are welcome! Please follow these guidelines:
-1. Use PEP 8 style guide
-2. Add type hints to functions and classes
-3. Write docstrings for public methods
-4. Add tests for new features
-5. Update documentation as needed
+## 🔧 Troubleshooting
 
-## Version History
+### Error: "PySide6 requires libEGL.so"
 
-- **1.0.0** - Initial release with core features
-  - Database management
-  - Data browsing and editing
-  - SQL editor
-  - Import/Export
-  - Dark mode support
+**Solusi (Linux headless server):**
+```bash
+# Install Xvfb
+sudo apt-get install xvfb
+
+# Jalankan dengan Xvfb
+xvfb-run python main.py
+```
+
+**Solusi (Windows):**
+- Pastikan Visual C++ Redistributable terinstall
+- Update driver graphics card
+
+### Error: "Database is locked"
+
+**Penyebab:** Database sedang digunakan oleh proses lain.
+
+**Solusi:**
+- Tutup aplikasi lain yang menggunakan database
+- Restart aplikasi
+- Periksa file lock (`*.db-shm`, `*.db-wal`)
+
+### Error: "Unable to init server"
+
+**Solusi (Linux):**
+```bash
+export DISPLAY=:0
+python main.py
+```
+
+### Build EXE Gagal
+
+**Solusi:**
+```bash
+# Bersihkan build sebelumnya
+rm -rf build dist *.spec
+
+# Build ulang dengan verbose
+pyinstaller --verbose --onefile --windowed main.py
+```
+
+### Database Corruption
+
+**Solusi:**
+1. Gunakan fitur "Integrity Check" di aplikasi
+2. Jika corrupt, coba recover dengan:
+   ```bash
+   sqlite3 database.db ".recover" > recovered.sql
+   sqlite3 new_database.db < recovered.sql
+   ```
+3. Selalu gunakan backup sebelum operasi besar
+
+## 📝 Log File
+
+Log aplikasi tersimpan di:
+- **Windows:** `%APPDATA%/SQLiteManager/logs/app.log`
+- **Linux:** `~/.local/share/SQLiteManager/logs/app.log`
+- **macOS:** `~/Library/Application Support/SQLiteManager/logs/app.log`
+
+## ⌨️ Shortcut Keyboard
+
+| Shortcut | Fungsi |
+|----------|--------|
+| `Ctrl+N` | Database baru |
+| `Ctrl+O` | Buka database |
+| `Ctrl+S` | Save changes |
+| `Ctrl+W` | Tutup database |
+| `F5` | Refresh |
+| `Ctrl+Enter` | Execute SQL query |
+| `Ctrl+Q` | Keluar aplikasi |
+| `Ctrl+,` | Toggle dark mode |
+
+## 🔒 Keamanan
+
+- Menggunakan parameterized queries untuk mencegah SQL injection
+- Tidak menyimpan password (SQLite tidak memiliki authentication native)
+- Semua data tetap lokal, tidak dikirim ke internet
+- Validasi input untuk nama tabel dan kolom
+- Konfirmasi untuk operasi destruktif (DROP, DELETE, dll)
+
+## 📄 Lisensi
+
+[Tambahkan informasi lisensi di sini]
+
+## 👥 Kontribusi
+
+Kontribusi sangat diterima! Silakan:
+1. Fork repository
+2. Buat feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
+
+## 📞 Support
+
+Untuk pertanyaan atau issue, silakan buat issue di repository GitHub atau hubungi developer.
+
+---
+
+**Dibuat dengan ❤️ menggunakan Python dan PySide6**
